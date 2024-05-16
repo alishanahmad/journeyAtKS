@@ -1,8 +1,7 @@
 import { DataTypes } from "sequelize";
 import sequelize from "../../db/config.js";
 
-const departmentModel = sequelize.define(
-"Marks", {
+const departmentModel = sequelize.define("Marks", {
   //MOdel attributes are defined here
   Name: {
     type: DataTypes.STRING,

@@ -1,16 +1,16 @@
 import "dotenv/config";
 import express from "express";
 import allRoutes from "./router/index.js";
-import { connectionDB} from "./db/config.js";
+import { connectionDB } from "./db/config.js";
 import syncDB from "./db/init.js";
 
 // import teacherRoute from "./router/teacher/index.js";
 // import studentRoute from "./router/student/index.js";
 // import marksRoute from "./router/marks/index.js";
 connectionDB();
-syncDB().then(()=>console.log("db synced"));
+syncDB().then(() => console.log("db synced"));
 
-const app=express();
+const app = express();
 
 app.use(express.json());
 
@@ -18,10 +18,9 @@ app.use(express.json());
 // app.use(studentRoute);
 // app.use(marksRoute);
 
-app.use(allRoutes)
+app.use(allRoutes);
 
 // listing the port
-app.listen(3000,()=>{
-    console.log("Server is running at port: 3000");
-})
-
+app.listen(3000, () => {
+  console.log("Server is running at port: 3000");
+});

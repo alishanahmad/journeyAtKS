@@ -1,13 +1,13 @@
 import { Router } from "express";
 
 import marksController from "../../controller/marks/index.js";
-const marksRoute=Router();
+const marksRoute = Router();
 
 //finding all marks.
-marksRoute.get("/marks",marksController.getAllMarks);
+marksRoute.get("/marks", marksController.getAllMarks);
 
 //finding marks by rollNumber.
-marksRoute.get("/marks/:rollNumber",marksController.getSingleMarks);
+marksRoute.get("/marks/:rollNumber", marksController.getSingleMarks);
 
 // Adding new marks
 marksRoute.post("/marks", marksController.postMarks);

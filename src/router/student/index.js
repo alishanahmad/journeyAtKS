@@ -1,10 +1,10 @@
 import { Router } from "express";
 import studentController from "../../controller/student/index.js";
-const studentRoute=Router();
+const studentRoute = Router();
 //finding all students.
-studentRoute.get("/students",studentController.getAllStudents);
+studentRoute.get("/students", studentController.getAllStudents);
 //finding student by id.
-studentRoute.get("/student/:id",studentController.getSingleStudent);
+studentRoute.get("/student/:id", studentController.getSingleStudent);
 
 //Adding new student
 studentRoute.post("/students", studentController.postStudent);
