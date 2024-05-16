@@ -1,7 +1,18 @@
-import {Router} from "express"
-import teacherController from "../../controller/teacher/index.js"
+
+import { Router } from "express";
+import teacherController from "../../controller/teacher/index.js";
 const teacherRoute=Router();
+//finding all teachers.
+teacherRoute.get("/teachers",teacherController.getAllTeachers);
+//finding teacher by id.
+teacherRoute.get("/teacher/:id",teacherController.getSingleTeacher);
 
-teacherRoute.get("/teachers",teacherController.getAllTeacher);
+//Adding new Teacher
+teacherRoute.post("/teachers", teacherController.postTeacher);
 
+// PUT - Update a Teacher by ID
+teacherRoute.put("/teacher/:id", teacherController.updateTeacher);
+
+//Deleting Teacher
+teacherRoute.delete("/teacher/:id", teacherController.deleteTeacher);
 export default teacherRoute;
