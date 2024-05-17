@@ -7,63 +7,82 @@
 //     { id:6,subjectMarks:[{english:"45",urdu:"78",phy:"53",pakStudy:"73"}]},
 // ];
 
+import marksModel from "../../model/marks/index.js";
+// import studentModel from "../../model/student/index.js";
+
 const marksController = {
-  getAllMarks: (req, res) => {
+  getAllMarks: async (req, res) => {
     try {
+      const studentMarks = await marksModel.findAll();
       res.json({
-        data: studentMarks,
+        message:"student found",
+        studentMarks,
+        
         //studentData
       });
     } catch (error) {
       res.status(500).json({ message: "Internal server error" });
     }
   },
-  getSingleMarks: (req, res) => {
+  getSingleMarks: async (req, res) => {
     try {
       const { id } = req.params;
-      const marks = studentMarks.find((std) => std.id == id);
-      if (!marks) {
+      const studentMarks = await marksModel.findByPk(id); //((std) => std.id == id);
+
+      // console.log("it is id of marks ",id);
+      if (!studentMarks) {
         return res.status(404).json({
           message: "not found",
         });
-      } else {
-        res.status(200).json({ data: marks });
-      }
+      } 
+    //   else {
+    //   res.status(200).json({ studentMarks });
+    // }
+      res.status(200).json({ studentMarks });
     } catch (error) {
       res.status(500).json({
         message: "Internal Server Error",
+        error
       });
     }
   },
-  postMarks: (req, res) => {
+  postMarks: async (req, res) => {
     try {
-      const newMarks = req.body;
-      studentMarks.push(newMarks);
+      const payload = req.body;
+      // studentMarks.push(newMarks);
+      const newMarks = new marksModel();
+      newMarks.english = payload.english;
+      newMarks.urdu = payload.urdu;
+      newMarks.phy = payload.phy;
+      newMarks.pakStudy = payload.pakStudy;
+      await newMarks.save();
       res.json({
         message: "student added successfully",
-        studentMarks,
+        newMarks,
       });
     } catch (error) {
+      console.log(error);
       res.status(500).json({ message: "Internal server error" });
     }
   },
-  updateMarks: (req, res) => {
+  updateMarks: async (req, res) => {
     try {
       const { id } = req.params;
       const payload = req.body;
-      const index = studentMarks.findIndex((std) => std.id == id);
-      if (index == -1) {
+      const updateMarks = await marksModel.findByPk(id); //(std) => std.id == id);
+      if (!id) {
         res.status(404).json({
-          message: "Marks not found",
+          message: "updateMarks not found",
         });
       }
 
       if (payload.english) {
-        studentMarks[index].english = payload.english;
+        updateMarks.english = payload.english;
       }
       if (payload.pakStudy) {
-        studentMarks[index].pakStudy = payload.pakStudy;
+        updateMarks.pakStudy = payload.pakStudy;
       }
+      await updateMarks.save();
 
       // studentsMarks[studentIndex].english = payload.english
       //   ? payload.english
@@ -79,23 +98,34 @@ const marksController = {
       res.status(500).json({ message: "Internal server error" });
     }
   },
-  deleteMarks: (req, res) => {
-    try {
-      const { id } = req.params;
-      const index = studentMarks.findIndex((std) => std.id == id);
-      if (index == -1) {
-        return res.status(404).json({
-          message: "Teeacher not found",
-        });
-      } else {
-        studentMarks.splice(index, 1);
-        res.status(200).json({
-          message: "Marks deleted successfully",
-        });
-      }
-    } catch (error) {
-      res.status(500).json({ message: "Internal server error" });
+  deleteMarks: async (req, res) => {
+    // try {
+    //   const { id } = req.params;
+    //   const index = studentMarks.findIndex((std) => std.id == id);
+    //   if (index == -1) {
+    //     return res.status(404).json({
+    //       message: "Teeacher not found",
+    //     });
+    //   } else {
+    //     studentMarks.splice(index, 1);
+    //     res.status(200).json({
+    //       message: "Marks deleted successfully",
+    //     });
+    //   }
+    // } catch (error) {
+    //   res.status(500).json({ message: "Internal server error" });
+    // }
+    const { id } = req.params;
+    const studentMarks = await marksModel.findByPk(id);
+    if(!studentMarks){
+      return res.status(404).json({message:"Marks not found"});
     }
+
+    await studentMarks.destroy();
+    res.json({
+      message: "Marks deleted successfully",
+      studentMarks,
+    });
   },
 };
 export default marksController;

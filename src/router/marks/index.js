@@ -7,15 +7,15 @@ const marksRoute = Router();
 marksRoute.get("/marks", marksController.getAllMarks);
 
 //finding marks by rollNumber.
-marksRoute.get("/marks/:rollNumber", marksController.getSingleMarks);
+marksRoute.get("/marks/:id", marksController.getSingleMarks);
 
 // Adding new marks
 marksRoute.post("/marks", marksController.postMarks);
 
 // PUT - Update a marks by rollNumber
-marksRoute.put("/marks/:rollNumber", marksController.updateMarks);
+marksRoute.put("/marks/:id", marksController.updateMarks);
 
 // Deleting marks
-marksRoute.delete("/marks/:rollNumber", marksController.deleteMarks);
+marksRoute.delete("/marks/:id", marksController.deleteMarks);
 
 export default marksRoute;
