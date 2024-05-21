@@ -10,8 +10,7 @@ import studentModel from "../../model/student/index.js";
 const studentController = {
   getAllStudents: async (req, res) => {
     try {
-      const students = await studentModel
-        .findAll(); //{
+      const students = await studentModel.findAll(); //{
         //   where: {
         //     name: "Hashir",
 
@@ -31,7 +30,7 @@ const studentController = {
 
   getSingleStudent: async (req, res) => {
     try {
-      const id  = req.params.id;
+      const id  = req.params;
       // const student=studentData.find(std=>std.rollNumber==rollNumber);std=>std.id==id
       const student = await studentModel.findOne({
         where: { id },
@@ -62,7 +61,6 @@ const studentController = {
   postStudent: async (req, res) => {
     try {
       const payload = req.body;
-
       const student = new studentModel();
       student.name = payload.name;
       student.age = payload.age;
@@ -80,7 +78,7 @@ const studentController = {
   },
   updateStudent: async (req, res) => {
     try {
-      const { id } = req.params.id;
+      const { id } = req.params;
       const payload = req.body;
       // const index = studentData.findIndex(
       //   (std) => std.rollNumber == rollNumber
@@ -131,7 +129,7 @@ const studentController = {
     // } catch (error) {
     //   res.status(500).json({ message: "Internal server error" });
     // }
-    const { id } = req.params.id;
+    const { id } = req.params;
     const student = await studentModel.findOne({ where: { id } });
     if(!student){
       res.status(404).json({

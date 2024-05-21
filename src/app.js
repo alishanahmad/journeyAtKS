@@ -1,6 +1,6 @@
 import "dotenv/config";
 import express from "express";
-import allRoutes from "./router/index.js";
+import allRoute from "./router/index.js";
 import { connectionDB } from "./db/config.js";
 import syncDB from "./db/init.js";
 
@@ -18,7 +18,7 @@ app.use(express.json());
 // app.use(studentRoute);
 // app.use(marksRoute);
 
-app.use(allRoutes);
+app.use(allRoute);
 
 // listing the port
 app.listen(3000, () => {

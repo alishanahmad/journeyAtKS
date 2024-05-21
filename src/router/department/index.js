@@ -1,27 +1,27 @@
 import { Router } from "express";
 
 import departmentController from "../../controller/department/index.js";
-const departmentRoutes = Router();
+const departmentRoute = Router();
 
 //finding all Department.
-departmentRoutes.get("/departments", departmentController.getAllDepartment);
+departmentRoute.get("/departments", departmentController.getAllDepartment);
 
 //finding Department by id.
-departmentRoutes.get(
+departmentRoute.get(
   "/Department/:id",
   departmentController.getSingleDepartment
 );
 
 // Adding new Department
-departmentRoutes.post("/Departments", departmentController.postDepartment);
+departmentRoute.post("/Departments", departmentController.postDepartment);
 
 // PUT - Update a Department by id
-departmentRoutes.put("/Department/:id", departmentController.updateDepartment);
+departmentRoute.put("/Department/:id", departmentController.updateDepartment);
 
 // Deleting Department
-departmentRoutes.delete(
+departmentRoute.delete(
   "/Department/:id",
   departmentController.deleteDepartment
 );
 
-export default departmentRoutes;
+export default departmentRoute;
