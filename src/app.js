@@ -11,8 +11,8 @@ connectionDB();
 syncDB().then(() => console.log("db synced"));
 
 const app = express();
-
 app.use(express.json());
+const port=3000;
 
 // app.use(teacherRoute);
 // app.use(studentRoute);
@@ -21,6 +21,6 @@ app.use(express.json());
 app.use(allRoute);
 
 // listing the port
-app.listen(3000, () => {
-  console.log("Server is running at port: 3000");
+app.listen(port, () => {
+  console.log(`Server is running at port ${port}`);
 });

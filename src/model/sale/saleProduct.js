@@ -25,7 +25,7 @@
 import sequelize from '../../db/config.js';
 import { DataTypes } from 'sequelize';
 import saleModel from './sales.js';
-import productModel from './products.js';
+import productModel from '../product/index.js';
 
 const saleProductsModels = sequelize.define(
   'SaleProducts',
@@ -45,6 +45,7 @@ const saleProductsModels = sequelize.define(
 
 saleModel.hasMany(saleProductsModels);
 saleProductsModels.belongsTo(saleModel);
+
 productModel.hasMany(saleProductsModels);
 saleProductsModels.belongsTo(productModel);
 
