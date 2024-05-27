@@ -1,11 +1,4 @@
-// const studentMarks = [
-//     { id:1,subjectMarks:[{english:"65",urdu:"45",phy:"73",pakStudy:"34"}]},
-//     { id:2,subjectMarks:[{english:"76",urdu:"82",phy:"74",pakStudy:"45"}]},
-//     { id:3,subjectMarks:[{english:"73",urdu:"55",phy:"65",pakStudy:"53"}]},
-//     { id:4,subjectMarks:[{english:"55",urdu:"45",phy:"78",pakStudy:"39"}]},
-//     { id:5,subjectMarks:[{english:"65",urdu:"53",phy:"39",pakStudy:"55"}]},
-//     { id:6,subjectMarks:[{english:"45",urdu:"78",phy:"53",pakStudy:"73"}]},
-// ];
+
 
 import marksModel from "../../model/marks/index.js";
 // import studentModel from "../../model/student/index.js";
