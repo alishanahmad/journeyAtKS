@@ -17,9 +17,10 @@
 // export default studentRoute;
 import { Router } from "express";
 import studentController from "../../controller/student/index.js";
+import authenticateMiddleware from "../../middleware/auth.js";
 const studentRoute=Router();
 
-studentRoute.get("/students",studentController.get)
+studentRoute.get("/students",authenticateMiddleware,studentController.get)
 studentRoute.get("/student/:id",studentController.getSingle)
 studentRoute.post("/student",studentController.post)
 studentRoute.put("/student/:id",studentController.put)
