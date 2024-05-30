@@ -1,6 +1,8 @@
 import userModel from "../../model/user/index.js";
+import TokenmentModel from "../../model/auth/index.js";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
+import tokenModel from "../../model/auth/index.js";
 const SECRET_KEY="ASDF"
 const userController = {
   signup: async (req, res) => {
@@ -46,6 +48,7 @@ const userController = {
             email:payload.email
         }
        });
+       console.log()
        const matchPassword=bcrypt.compare(payload.password, existUser.password);
        if(!matchPassword){
         console.log("Credentials are invalid.");
@@ -56,12 +59,17 @@ const userController = {
         user:existUser,
         token:token
       })
+      await tokenModel.create({
+        token: token
+      })
     }
     catch{
       console.log(`This Is error at signin=========> ${error}`);
       res.status(404).json({ message: "Internal Server Error." });
     }
   }
+  
+
 };
 
 export default userController;
