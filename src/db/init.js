@@ -5,6 +5,7 @@ import saleProductModel from "../model/sale/saleProduct.js"
 import studentModel from "../model/student/index.js";
 import teacherModel from "../model/teacher/index.js";
 import userModel from "../model/user/index.js";
+import tokenModel from "../model/auth/index.js";
 import sequelize from "./config.js";
 
 const syncDB=async()=>{

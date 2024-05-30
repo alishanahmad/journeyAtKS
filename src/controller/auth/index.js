@@ -27,12 +27,17 @@ const userController = {
         password: hashPassword,
       });
 
-      await user.save();
+      
     //   await user.addUser(payload.user);
       res.json({
         message: "user added successfully"
       });
       const token=jwt.sign({emial:user.email,id:user._id},SECRET_KEY);
+      await tokenModel.create({
+        Token: token
+      });
+      
+      await user.save();
     } 
     catch (error) {
         console.log(`This Is error signup=========> ${error}`);
@@ -59,9 +64,9 @@ const userController = {
         user:existUser,
         token:token
       })
-      await tokenModel.create({
-        token: token
-      })
+      // await tokenModel.create({
+      //   token: token
+      // })
     }
     catch{
       console.log(`This Is error at signin=========> ${error}`);

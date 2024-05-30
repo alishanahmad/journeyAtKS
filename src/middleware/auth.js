@@ -1,5 +1,5 @@
 import jwt from "jsonwebtoken";
-import tokenModel from "../model/auth";
+import tokenModel from "../model/auth/index.js";
 
 const authenticateMiddleware = async(req, res, next) => {
   let token = req.headers.authorization;
@@ -10,7 +10,7 @@ const authenticateMiddleware = async(req, res, next) => {
   try {
     await tokenModel.findOne({
       where:{
-        token:token
+        Token:token
       }
     })
     const decoded = jwt.verify(token, "ASDF");
