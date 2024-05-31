@@ -59,7 +59,7 @@ const userController = {
         console.log("Credentials are invalid.");
        }
 
-      const token=jwt.sign({emial:existUser.email,id:existUser._id},SECRET_KEY);
+      const token=jwt.sign({emial:existUser.email,id:existUser._id},SECRET_KEY,{expiresIn: '36000m'});
       res.status(200).json({
         user:existUser,
         token:token

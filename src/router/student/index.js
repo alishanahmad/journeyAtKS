@@ -21,7 +21,7 @@ import authenticateMiddleware from "../../middleware/auth.js";
 const studentRoute=Router();
 
 studentRoute.get("/students",authenticateMiddleware,studentController.get)
-studentRoute.get("/student/:id",studentController.getSingle)
+studentRoute.get("/student/:id",authenticateMiddleware,studentController.getSingle)
 studentRoute.post("/student",studentController.post)
 studentRoute.put("/student/:id",studentController.put)
 studentRoute.delete("/student/:id",studentController.delete)

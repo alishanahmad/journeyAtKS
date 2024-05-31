@@ -10,9 +10,17 @@ const authenticateMiddleware = async(req, res, next) => {
   try {
     await tokenModel.findOne({
       where:{
-        Token:token
+        Token:token,
       }
     })
+    if (!token){
+      res.status(404).json({
+        message: "Token not found",
+        message:"unathurized."
+      })
+    }
+    // token=token.replace("Bearer","");
+
     const decoded = jwt.verify(token, "ASDF");
     console.log("---------------------------------------------------------------------------");
     console.log(decoded, "req.body");
